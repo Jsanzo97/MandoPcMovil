@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".FuncionesPrincipales.Mando"
+    tools:layout_editor_absoluteY="25dp">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="267dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="Mando Pc"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="#fff" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="100dp"
+            android:paddingTop="5dp"
+            android:text="Develop by Jsanzo97®"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/touchpad"
+        android:layout_width="350dp"
+        android:layout_height="0dp"
+        android:background="@color/colorAccent"
+        android:onClick="mover"
+        android:paddingTop="150dp"
+        android:text="Touchpad"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toStartOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <Button
+        android:id="@+id/subir"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="16dp"
+        android:onClick="subir"
+        android:text="VOL +"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/teclado2"
+        app:layout_constraintEnd_toStartOf="@+id/bajar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subirBrillo" />
+
+    <Button
+        android:id="@+id/bajar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="20dp"
+        android:onClick="bajar"
+        android:text="VOL -"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/teclado2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/subir" />
+
+    <com.example.jorge.mandopc.CustomElements.Teclado
+        android:id="@+id/teclado2"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:cursorVisible="false"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:imeOptions="flagNoExtractUi"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subir">
+
+        <requestFocus />
+    </com.example.jorge.mandopc.CustomElements.Teclado>
+
+    <Button
+        android:id="@+id/subirBrillo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="16dp"
+        android:onClick="subirBrillo"
+        android:text="BRILLO +"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/subir"
+        app:layout_constraintEnd_toStartOf="@+id/bajarBrillo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <Button
+        android:id="@+id/bajarBrillo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:onClick="bajarBrillo"
+        android:text="BRILLO -"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/bajar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/subirBrillo" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="350dp"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintEnd_toStartOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="25dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/subirBrillo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+</android.support.constraint.ConstraintLayout>
