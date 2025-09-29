@@ -1,4 +1,4 @@
-package com.example.jorge.mandopc.BaseDeDatosLocal
+package com.example.jorge.mandopc.bd
 
 import android.content.ContentValues
 import android.content.Context

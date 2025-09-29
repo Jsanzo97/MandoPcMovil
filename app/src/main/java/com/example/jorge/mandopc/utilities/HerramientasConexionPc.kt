@@ -1,4 +1,4 @@
-package com.example.jorge.mandopc.Utilities
+package com.example.jorge.mandopc.utilities
 
 import java.io.PrintWriter
 import java.net.Socket

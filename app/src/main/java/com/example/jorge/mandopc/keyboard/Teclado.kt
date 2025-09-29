@@ -1,4 +1,4 @@
-package com.example.jorge.mandopc.CustomElements
+package com.example.jorge.mandopc.keyboard
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,10 +6,11 @@ import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputConnection
 import android.view.inputmethod.InputConnectionWrapper
-import com.example.jorge.mandopc.Utilities.enviar
-import com.example.jorge.mandopc.Utilities.ip
+import androidx.appcompat.widget.AppCompatEditText
+import com.example.jorge.mandopc.utilities.enviar
+import com.example.jorge.mandopc.utilities.ip
 
-class Teclado : android.support.v7.widget.AppCompatEditText {
+class Teclado : AppCompatEditText {
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle)
 
@@ -22,7 +23,7 @@ class Teclado : android.support.v7.widget.AppCompatEditText {
                 true)
     }
 
-    private inner class TecladoInputConnection(target: InputConnection, mutable: Boolean) : InputConnectionWrapper(target, mutable) {
+    private inner class TecladoInputConnection(target: InputConnection?, mutable: Boolean) : InputConnectionWrapper(target, mutable) {
 
         override fun sendKeyEvent(event: KeyEvent): Boolean {
             if (event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_DEL) {
