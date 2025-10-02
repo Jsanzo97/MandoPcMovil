@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jorge.mandopc.presentation.controller.model.ControllerAction
 import com.example.jorge.mandopc.presentation.theme.MandoPcMovilTheme
 import com.example.jorge.mandopc.utilities.DragHandler
@@ -32,8 +34,11 @@ class ControllerActivity : ComponentActivity() {
         presenter.invokeAction(ControllerAction.CreateConnection(ip))
 
         setContent {
+            val state by presenter.state.collectAsStateWithLifecycle()
+
             MandoPcMovilTheme {
                 ControllerScreen(
+                    state = state,
                     pointerInputEventHandler = {
                         dragHandler.handleGestures(
                             scope = this,
@@ -42,11 +47,29 @@ class ControllerActivity : ComponentActivity() {
                             },
                             onDragFinish = {
                                 presenter.invokeAction(ControllerAction.DragFinish)
-                            }
+                            },
                         )
-                    }
+                    },
+                    onLeftClick = {
+                        presenter.invokeAction(ControllerAction.LeftClick)
+                    },
+                    onRightClick = {
+                        presenter.invokeAction(ControllerAction.RightClick)
+                    },
+                    onReconnect = { },
+                    onKeyboard = { }
                 )
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.invokeAction(ControllerAction.Disconnect)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.invokeAction(ControllerAction.Disconnect)
     }
 }

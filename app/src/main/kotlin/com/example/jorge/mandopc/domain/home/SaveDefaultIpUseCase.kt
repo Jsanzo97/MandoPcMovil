@@ -12,6 +12,7 @@ internal class SaveDefaultIpUseCaseImpl(
 ) : SaveDefaultIpUseCase {
 
     override suspend fun invoke(ip: String) {
+        ipDao.delete()
         return ipDao.insert(IpModel(ip))
     }
 }

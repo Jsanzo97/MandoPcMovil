@@ -3,6 +3,7 @@ package com.example.jorge.mandopc.presentation.home
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jorge.mandopc.presentation.controller.ControllerActivity
 import com.example.jorge.mandopc.presentation.home.model.HomeAction
@@ -21,13 +22,13 @@ class HomeActivity : ComponentActivity() {
         presenter.invokeAction(HomeAction.RetrieveDefaultIp)
 
         setContent {
-            val state = presenter.state.collectAsStateWithLifecycle().value
+            val state by presenter.state.collectAsStateWithLifecycle()
 
             when (state) {
                 is HomeState.Ready -> {
                     MandoPcMovilTheme {
-                        MainScreen(
-                            state = presenter.state.collectAsStateWithLifecycle().value,
+                        HomeScreen(
+                            state = state,
                             onConnect = { ip, isDefault ->
                                 presenter.invokeAction(HomeAction.Connect(ip, isDefault))
                             },
@@ -42,7 +43,7 @@ class HomeActivity : ComponentActivity() {
                     startActivity(
                         ControllerActivity.getIntent(
                             context = this,
-                            ip = state.ip
+                            ip = (state as HomeState.Success).ip
                         )
                     )
                 }

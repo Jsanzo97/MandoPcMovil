@@ -19,8 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.jorge.mandopc.presentation.tutorial.Instrucciones" />
-        <activity android:name="com.example.jorge.mandopc.presentation.controller.ControllerActivity"
-            android:screenOrientation="fullSensor"/>
+        <activity android:name="com.example.jorge.mandopc.presentation.controller.ControllerActivity" />
     </application>
 
 </manifest>

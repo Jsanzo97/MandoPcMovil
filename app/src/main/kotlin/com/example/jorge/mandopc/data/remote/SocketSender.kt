@@ -55,7 +55,7 @@ internal class SocketSender() {
             }
 
             writer?.println(message)
-            writer?.flush() // Force immediate send
+            writer?.flush()
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
@@ -89,12 +89,10 @@ internal class SocketSender() {
             writer = null
             dataOutputStream = null
             socket = null
-        } catch (e: Exception) {
-            // Ignore
+        } catch (_: Exception) {
+            // No-op
         }
     }
-
-    fun isConnected(): Boolean = isConnected
 
     private fun startSendJob() {
         sendJob = CoroutineScope(Dispatchers.IO).launch {
@@ -103,7 +101,7 @@ internal class SocketSender() {
                     if (!isConnected) break
                     writer?.println(message)
                 }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 disconnect()
             }
         }

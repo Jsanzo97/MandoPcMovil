@@ -1,17 +1,17 @@
 package com.example.jorge.mandopc.presentation.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,13 +24,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.jorge.mandopc.presentation.common.CustomToolbar
 import com.example.jorge.mandopc.presentation.home.model.HomeState
+import com.example.jorge.mandopc.presentation.theme.MandoPcMovilTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun MainScreen(
+internal fun HomeScreen(
     state: HomeState,
     onConnect: (ip: String, isDefault: Boolean) -> Unit,
     onTutorials: () -> Unit,
@@ -44,10 +43,11 @@ internal fun MainScreen(
             var setDefaultIp by remember { mutableStateOf(false) }
 
             Column(
-                modifier = modifier.fillMaxSize()
+                modifier = modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(32.dp)
             ) {
-                CustomToolbar()
-
                 Column(
                     modifier = Modifier
                         .fillMaxSize(),
@@ -55,17 +55,17 @@ internal fun MainScreen(
                     verticalArrangement = Arrangement.Center,
                 ) {
                     OutlinedTextField(
+                        modifier = Modifier
+                            .fillMaxWidth(),
                         value = ipAddress,
                         onValueChange = { ipAddress = it },
                         label = { Text("Introduzca aqui la IP") },
                         singleLine = true,
-                        modifier = Modifier.width(215.dp)
                     )
 
-                    Spacer(Modifier.height(13.dp))
-
                     Row(
-                        modifier = Modifier.widthIn(max = 214.dp),
+                        modifier = Modifier
+                            .fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Checkbox(
@@ -74,31 +74,35 @@ internal fun MainScreen(
                         )
                         Text(
                             text = "Establecer como predeterminada",
-                            fontSize = 12.sp,
-                            modifier = Modifier.padding(start = 4.dp)
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                     }
 
-                    Spacer(Modifier.height(28.dp))
-
                     Button(
+                        modifier = Modifier
+                            .fillMaxWidth(),
                         onClick = {
                             keyboardController?.hide()
                             onConnect(ipAddress, setDefaultIp)
                         },
-                        modifier = Modifier.width(217.dp)
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary
+                        )
                     ) {
                         Text("Conectar")
                     }
 
-                    Spacer(Modifier.height(12.dp))
 
                     Button(
+                        modifier = Modifier
+                            .fillMaxWidth(),
                         onClick = {
                             keyboardController?.hide()
                             onTutorials()
                         },
-                        modifier = Modifier.width(215.dp)
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary
+                        )
                     ) {
                         Text("Instrucciones")
                     }
@@ -112,9 +116,11 @@ internal fun MainScreen(
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
-    MainScreen(
-        state = HomeState.Ready(),
-        onConnect = { _, _ -> },
-        onTutorials = { }
-    )
+    MandoPcMovilTheme {
+        HomeScreen(
+            state = HomeState.Ready(),
+            onConnect = { _, _ -> },
+            onTutorials = { }
+        )
+    }
 }

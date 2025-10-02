@@ -4,7 +4,7 @@ import com.example.jorge.mandopc.data.remote.SocketSender
 
 internal interface MoveMouseUseCase {
 
-    fun moveMouse(x: Int, y: Int)
+    fun moveMouse(dragX: Int, dragY: Int)
     suspend fun dragFinish()
 
 }
@@ -13,8 +13,8 @@ internal class MoveMouseUseCaseImpl(
     val socketSender: SocketSender
 ): MoveMouseUseCase {
 
-    override fun moveMouse(x: Int, y: Int) {
-        socketSender.sendThrottled("movement $x,$y")
+    override fun moveMouse(dragX: Int, dragY: Int) {
+        socketSender.sendThrottled("movement $dragX,$dragY")
     }
 
     override suspend fun dragFinish() {

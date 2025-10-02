@@ -21,5 +21,4 @@ internal class HandleConnectionUseCaseImpl(
     override suspend fun removeConnection() {
         socketSender.disconnect()
     }
-
 }
