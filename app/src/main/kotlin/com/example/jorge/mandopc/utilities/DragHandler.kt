@@ -3,10 +3,6 @@ package com.example.jorge.mandopc.utilities
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.PointerInputScope
 
-/**
- * A stateless service to handle drag gestures.
- * Can be safely injected as a Koin singleton.
- */
 class DragHandler {
 
     suspend fun handleGestures(
