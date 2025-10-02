@@ -13,9 +13,10 @@ class CustomApplication : Application() {
             androidLogger()
             androidContext(this@CustomApplication)
             modules(listOf(
-                appModule,
-                databaseModule,
-                useCaseModule
+                presentationModule,
+                domainModule,
+                dataLocalModule,
+                dataRemoteModule
             ))
         }
     }

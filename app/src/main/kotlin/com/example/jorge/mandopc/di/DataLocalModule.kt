@@ -5,7 +5,7 @@ import com.example.jorge.mandopc.data.local.database.IpDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-val databaseModule = module {
+val dataLocalModule = module {
     single {
         Room.databaseBuilder(
             androidContext(),
@@ -14,7 +14,5 @@ val databaseModule = module {
         ).build()
     }
 
-    single {
-        get<IpDatabase>().ipDao()
-    }
+    single { get<IpDatabase>().ipDao() }
 }

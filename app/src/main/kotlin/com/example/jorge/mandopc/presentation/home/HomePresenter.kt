@@ -1,8 +1,8 @@
 package com.example.jorge.mandopc.presentation.home
 
-import com.example.jorge.mandopc.domain.GetStoredDefaultIpUseCase
-import com.example.jorge.mandopc.domain.RemoveDefaultIpUseCase
-import com.example.jorge.mandopc.domain.SaveDefaultIpUseCase
+import com.example.jorge.mandopc.domain.home.GetStoredDefaultIpUseCase
+import com.example.jorge.mandopc.domain.home.RemoveDefaultIpUseCase
+import com.example.jorge.mandopc.domain.home.SaveDefaultIpUseCase
 import com.example.jorge.mandopc.presentation.home.model.HomeAction
 import com.example.jorge.mandopc.presentation.home.model.HomeState
 import kotlinx.coroutines.CoroutineScope

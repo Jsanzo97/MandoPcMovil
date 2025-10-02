@@ -11,10 +11,7 @@ import java.io.PrintWriter
 import java.net.InetSocketAddress
 import java.net.Socket
 
-class SocketSender(
-    private val ip: String,
-    private val timeoutMs: Int = 5000
-) {
+internal class SocketSender() {
     private var socket: Socket? = null
     private var writer: PrintWriter? = null
     private var dataOutputStream: DataOutputStream? = null
@@ -24,14 +21,14 @@ class SocketSender(
     private var lastSendTime = 0L
     private val minSendInterval = 16L
 
-    suspend fun connect(): Result<Unit> = withContext(Dispatchers.IO) {
+    suspend fun connect(ip: String, port: Int = 7070, timeoutMs: Int = 5000): Result<Unit> = withContext(Dispatchers.IO) {
         try {
             if (isConnected) {
                 return@withContext Result.success(Unit)
             }
 
             socket = Socket().apply {
-                connect(InetSocketAddress(ip, 7070), timeoutMs)
+                connect(InetSocketAddress(ip, port), timeoutMs)
 
                 tcpNoDelay = true
                 sendBufferSize = 8192
@@ -65,7 +62,7 @@ class SocketSender(
         }
     }
 
-    fun send(message: String) {
+    private fun send(message: String) {
         if (isConnected) {
             messageQueue.trySend(message)
         }
@@ -79,9 +76,6 @@ class SocketSender(
         }
     }
 
-    /**
-     * Disconnect from the server
-     */
     suspend fun disconnect() = withContext(Dispatchers.IO) {
         try {
             isConnected = false

@@ -1,4 +1,4 @@
-package com.example.jorge.mandopc.domain
+package com.example.jorge.mandopc.domain.home
 
 import com.example.jorge.mandopc.data.local.dao.IpDao
 
