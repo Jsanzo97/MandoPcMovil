@@ -2,12 +2,13 @@ package com.example.jorge.mandopc.presentation.theme
 
 import android.app.Activity
 import android.os.Build
+import android.view.WindowInsets
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
@@ -61,14 +62,21 @@ fun MandoPcMovilTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb() // Or another color like surface
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+                window.decorView.setOnApplyWindowInsetsListener { view, insets ->
+                    val statusBarInsets = insets.getInsets(WindowInsets.Type.statusBars())
+                    view.setBackgroundColor(colorScheme.primary.toArgb())
+                    view.setPadding(0, statusBarInsets.top, 0, 0)
+                    insets
+                }
+            }
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = AppTypography, // From Type.kt
+        typography = AppTypography,
         content = content
     )
 }

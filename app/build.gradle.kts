@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.compose)
+    alias(libs.plugins.google.devtools.ksp)
+    alias(libs.plugins.androidx.room)
 }
 
 android {
@@ -10,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.mandopcmovil"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -30,13 +32,9 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     packaging {
@@ -44,10 +42,18 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    tasks.withType<JavaCompile> {
+        options.forkOptions.jvmArgs = listOf("--enable-native-access=ALL-UNNAMED")
+    }
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain(17)
 }
 
 dependencies {
@@ -65,6 +71,14 @@ dependencies {
 
     // Koin dependencies
     implementation(libs.koin.android)
+
+    // Timber
+    implementation(libs.timber)
+
+    // Room dependencies
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
     // Compose Debugging/Tooling (only for debug builds)
     debugImplementation(libs.androidx.compose.ui.tooling)

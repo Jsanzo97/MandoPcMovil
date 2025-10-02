@@ -15,7 +15,6 @@ class HomeActivity : ComponentActivity() {
 
     private val presenter: HomePresenter by inject()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,7 +45,6 @@ class HomeActivity : ComponentActivity() {
                             ip = state.ip
                         )
                     )
-                    finish()
                 }
             }
         }

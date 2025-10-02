@@ -1,19 +1,16 @@
 package com.example.jorge.mandopc.domain
 
-import com.example.jorge.mandopc.data.local.IpDbHelper
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
-import kotlin.getValue
+import com.example.jorge.mandopc.data.local.dao.IpDao
 
 internal interface RemoveDefaultIpUseCase {
-    operator fun invoke()
+    suspend operator fun invoke()
 }
 
-internal class RemoveDefaultIpUseCaseImpl: RemoveDefaultIpUseCase, KoinComponent {
-    private val ipDbHelper: IpDbHelper by inject()
+internal class RemoveDefaultIpUseCaseImpl(
+    private val ipDao: IpDao
+) : RemoveDefaultIpUseCase {
 
-    override fun invoke() {
-        ipDbHelper.deleteIp("1")
+    override suspend fun invoke() {
+        return ipDao.delete()
     }
-
 }
