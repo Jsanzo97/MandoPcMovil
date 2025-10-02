@@ -46,6 +46,12 @@ android {
     tasks.withType<JavaCompile> {
         options.forkOptions.jvmArgs = listOf("--enable-native-access=ALL-UNNAMED")
     }
+
+    sourceSets {
+        forEach {
+            it.java.srcDir("src/${it.name}/kotlin")
+        }
+    }
 }
 
 room {
@@ -71,9 +77,6 @@ dependencies {
 
     // Koin dependencies
     implementation(libs.koin.android)
-
-    // Timber
-    implementation(libs.timber)
 
     // Room dependencies
     implementation(libs.androidx.room.runtime)
