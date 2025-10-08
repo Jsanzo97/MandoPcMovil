@@ -8,5 +8,8 @@ internal sealed class ControllerAction {
     data class MoveMouse(val x: Int, val y: Int) : ControllerAction()
     data object DragFinish : ControllerAction()
     data object Disconnect : ControllerAction()
+    data class KeyPressed(val key: String) : ControllerAction()
+
+    data class Scroll(val x: Int, val y: Int) : ControllerAction()
 
 }

@@ -1,6 +1,7 @@
 package com.example.jorge.mandopc.presentation.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -47,6 +48,9 @@ internal fun HomeScreen(
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.background)
                     .padding(32.dp)
+                    .clickable {
+                        keyboardController?.hide()
+                    }
             ) {
                 Column(
                     modifier = Modifier

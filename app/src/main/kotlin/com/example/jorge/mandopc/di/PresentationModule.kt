@@ -13,7 +13,19 @@ import org.koin.dsl.module
 val presentationModule = module {
     single { CoroutineScope(Dispatchers.IO) }
     single { DragHandler() }
-    single { HomePresenterImpl(get(), get(), get(), get()) } bind HomePresenter::class
-    single { ControllerPresenterImpl(get(), get(), get(), get()) } bind ControllerPresenter::class
+    single { HomePresenterImpl(
+        scope = get(),
+        getStoredDefaultIpUseCase = get(),
+        removeDefaultIpUseCase = get(),
+        saveDefaultIpUseCase = get()
+    ) } bind HomePresenter::class
+    single { ControllerPresenterImpl(
+        scope = get(),
+        handleConnectionUseCase = get(),
+        clickMouseUseCase = get(),
+        moveMouseUseCase = get(),
+        sendKeyUseCase = get(),
+        scrollUseCase = get()
+    ) } bind ControllerPresenter::class
 
 }

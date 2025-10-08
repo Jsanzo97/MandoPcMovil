@@ -6,6 +6,10 @@ import com.example.jorge.mandopc.domain.controller.HandleConnectionUseCase
 import com.example.jorge.mandopc.domain.controller.HandleConnectionUseCaseImpl
 import com.example.jorge.mandopc.domain.controller.MoveMouseUseCase
 import com.example.jorge.mandopc.domain.controller.MoveMouseUseCaseImpl
+import com.example.jorge.mandopc.domain.controller.ScrollUseCase
+import com.example.jorge.mandopc.domain.controller.ScrollUseCaseImpl
+import com.example.jorge.mandopc.domain.controller.SendKeyUseCase
+import com.example.jorge.mandopc.domain.controller.SendKeyUseCaseImpl
 import com.example.jorge.mandopc.domain.home.GetStoredDefaultIpUseCase
 import com.example.jorge.mandopc.domain.home.GetStoredDefaultIpUseCaseImpl
 import com.example.jorge.mandopc.domain.home.RemoveDefaultIpUseCase
@@ -22,4 +26,6 @@ val domainModule = module {
     single { HandleConnectionUseCaseImpl(get()) } bind HandleConnectionUseCase::class
     single { ClickMouseUseCaseImpl(get()) } bind ClickMouseUseCase::class
     single { MoveMouseUseCaseImpl(get()) } bind MoveMouseUseCase::class
+    single { SendKeyUseCaseImpl(get()) } bind SendKeyUseCase::class
+    single { ScrollUseCaseImpl(get()) } bind ScrollUseCase::class
 }

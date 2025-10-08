@@ -3,6 +3,8 @@ package com.example.jorge.mandopc.presentation.controller
 import com.example.jorge.mandopc.domain.controller.ClickMouseUseCase
 import com.example.jorge.mandopc.domain.controller.HandleConnectionUseCase
 import com.example.jorge.mandopc.domain.controller.MoveMouseUseCase
+import com.example.jorge.mandopc.domain.controller.ScrollUseCase
+import com.example.jorge.mandopc.domain.controller.SendKeyUseCase
 import com.example.jorge.mandopc.presentation.controller.model.ControllerAction
 import com.example.jorge.mandopc.presentation.controller.model.ControllerState
 import kotlinx.coroutines.CoroutineScope
@@ -23,7 +25,9 @@ internal class ControllerPresenterImpl(
     val scope: CoroutineScope,
     val handleConnectionUseCase: HandleConnectionUseCase,
     val clickMouseUseCase: ClickMouseUseCase,
-    val moveMouseUseCase: MoveMouseUseCase
+    val moveMouseUseCase: MoveMouseUseCase,
+    val sendKeyUseCase: SendKeyUseCase,
+    val scrollUseCase: ScrollUseCase
 ): ControllerPresenter {
     private val _state = MutableStateFlow<ControllerState>(ControllerState.Ready)
     override val state: StateFlow<ControllerState>
@@ -55,6 +59,14 @@ internal class ControllerPresenterImpl(
 
                 ControllerAction.Disconnect -> {
                     handleConnectionUseCase.removeConnection()
+                }
+
+                is ControllerAction.KeyPressed -> {
+                    sendKeyUseCase.invoke(action.key)
+                }
+
+                is ControllerAction.Scroll -> {
+                    scrollUseCase.invoke(action.x, action.y)
                 }
             }
         }
